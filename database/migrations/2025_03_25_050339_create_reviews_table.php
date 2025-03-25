@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->foreignId('book_id');
             $table->float('rating', 2);
-            $table->string('content');
+            $table->text('content');
             $table->timestamps();
         });
     }

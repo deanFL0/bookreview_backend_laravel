@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('genres');
             $table->string('total_pages');
             $table->date('first_publish');
-            $table->string('synopsis')->nullable();
+            $table->text('synopsis')->nullable();
             $table->timestamps();
         });
     }
