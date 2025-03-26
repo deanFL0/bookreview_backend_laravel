@@ -17,6 +17,13 @@ class DatabaseSeeder extends Seeder
     {
         User::factory(10)->create();
 
+        User::factory()->create([
+            'email'=>'admin@example.com',
+            'name'=>'admin',
+            'password'=>'123',
+            'is_admin'=>true,
+        ]);
+
         Book::factory(20)->create()->each(function ($book){
             Review::factory(rand(2,10))->create([
                 'book_id'=>$book->id,
