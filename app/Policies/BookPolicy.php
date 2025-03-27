@@ -8,12 +8,22 @@ use Illuminate\Auth\Access\Response;
 
 class BookPolicy
 {
+
+    //allow admin for all action
+    public function before(User $user, string $ability) :bool|null
+    {
+        if($user->is_admin){
+            return true;
+        }
+        return null;
+    }
+
     /**
      * Determine whether the user can view any models.
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,7 +31,7 @@ class BookPolicy
      */
     public function view(User $user, Book $book): bool
     {
-        return false;
+        return true;
     }
 
     /**
