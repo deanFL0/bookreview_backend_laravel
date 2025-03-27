@@ -26,7 +26,18 @@ class BookController extends Controller
      */
     public function store(StoreBookRequest $request)
     {
-        //
+        $this->authorize('create', Book::class);
+
+        $data = $request->validated();
+        if($request->hasFile('cover_path')){
+            $data['cover_path'] = $request->file('cover_path')->store('covers', 'public');
+        }
+        $book = Book::create($data);
+
+        return response()->json([
+            'message' => 'Book created successfully!',
+            'book' => $book,
+        ], 201);
     }
 
     /**
@@ -35,14 +46,6 @@ class BookController extends Controller
     public function show(Book $book)
     {
         return new BookResource($book);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Book $book)
-    {
-        //
     }
 
     /**
